@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>convForm - example</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="dist/jquery.convform.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="demo.css">
+</head>
+<body>
+	<section id="demo">
+	    <div class="vertical-align">
+	        <div class="container">
+	            <div class="row">
+	                <div class="col-sm-6 col-sm-offset-3 col-xs-offset-0">
+	                    <div class="card no-border">
+	                        <div id="chat">
+	                            <form action="" method="GET" class="hidden">
+	                                <select data-conv-question="Йоу! Я - Колосок, бот-помощник Аграрного университета, Подскажи, чем я могу тебе помочь?" >
+	                                    <option value="Справки">Справки</option>
+	                                    <option value="Как попасть в студенческие объединения и центры?">Как попасть в студенческие объединения и центры?</option>
+										<option value="Как получить социалку?">Как получить социалку?</option>
+										<option value="Как получить поддержку в реализации моего проекта?">Как получить поддержку в реализации моего проекта?</option>
+										<option value="Мне нужна материальная помощь, куда я могу обратиться?">Мне нужна материальная помощь, куда я могу обратиться?</option>
+	                                </select>
+	                            </form>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</section>
+	<script type="text/javascript" src="jquery-1.12.3.min.js"></script>
+	<script type="text/javascript" src="dist/autosize.min.js"></script>
+	<script type="text/javascript" src="dist/jquery.convform.js"></script>
+
+</body>
+</html>
+
+<script>
+
+jQuery(function(И){
+		var count = 0;
+		var convForm = И('#chat').convform({eventList:{onInputSubmit: function(convState, ready) {
+			
+
+			if(convState.current.answer.value==='4') {;
+				//emulating random response time (100-600ms)
+				convState.current.next = false; 
+			} else {
+				convState.current.next = convState.newState({
+					type: 'select',
+					name: 'dynamic-question-'+count,
+					questions: ['Какая справка тебе нужна?'],
+					answers: [
+						{text: 'Справка о размере стипендии', value: '1'},
+						{text: 'Справка об обучении', value: '2'},
+						{text: 'Справка об отсутствии контакта с инфекционными больными', value: '3'},
+						{text: 'назад', value: '4'}
+					]
+				
+					
+					
+
+				});
+				
+				//emulating random response time (100-600ms)
+				setTimeout(ready, Math.random()*500+100);
+			}
+		}}});
+	});
+
+
+
+
+
+
+
+
+
+	
+
+
+	
+
+
+
+</script>
+</body>
+</html>
